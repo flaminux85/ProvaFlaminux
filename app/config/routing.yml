@@ -1,0 +1,5 @@
+flaminuxmio:
+    resource: "@flaminuxmioBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
