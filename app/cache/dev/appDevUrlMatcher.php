@@ -207,8 +207,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // flaminux_mio_default_index
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+        if (0 === strpos($pathinfo, '/hello2') && preg_match('#^/hello2/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'flaminux_mio_default_index')), array (  '_controller' => 'flaminux\\mioBundle\\Controller\\DefaultController::indexAction',));
+        }
+
+        // flaminux_mio_default_dammiunnome
+        if (rtrim($pathinfo, '/') === '/funzione') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'flaminux_mio_default_dammiunnome');
+            }
+
+            return array (  '_controller' => 'flaminux\\mioBundle\\Controller\\DefaultController::dammiUnNomeAction',  '_route' => 'flaminux_mio_default_dammiunnome',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
